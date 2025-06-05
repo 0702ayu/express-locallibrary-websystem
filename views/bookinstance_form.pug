@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  h1= title
+  h1=title
 
   form(method='POST')
     div.form-group
-      label(for='book') 書籍:
+      label(for='book') Book:
       select#book.form-control(name='book' required)
-        option(value='') --書籍を選択してください--
+        option(value='') --Please select a book--
         for book in book_list
           if selected_book==book._id.toString()
             option(value=book._id, selected) #{book.title}
@@ -15,33 +15,23 @@ block content
             option(value=book._id) #{book.title}
 
     div.form-group
-      label(for='imprint') 出版情報:
-      input#imprint.form-control(type='text' placeholder='出版社と出版日情報' name='imprint' required value=(undefined===bookinstance ? '' : bookinstance.imprint) )
+      label(for='imprint') Imprint:
+      input#imprint.form-control(type='text' placeholder='Publisher and date information' name='imprint' required value=(undefined===bookinstance ? '' : bookinstance.imprint) )
     div.form-group
-      label(for='due_back') 貸出可能日:
+      label(for='due_back') Date when book available:
       input#due_back.form-control(type='date' name='due_back' value=(undefined===bookinstance ? '' : bookinstance.due_back_yyyy_mm_dd))
 
     div.form-group
-      label(for='status') 状態:
+      label(for='status') Status:
       select#status.form-control(name='status' required)
-        option(value='') --状態を選択してください--
+        option(value='') --Please select a status--
         each val in ['Maintenance', 'Available', 'Loaned', 'Reserved']
           if undefined===bookinstance || bookinstance.status!=val 
-            option(value=val)=
-              if val=='Maintenance' then 'メンテナンス中'
-              else if val=='Available' then '利用可能'
-              else if val=='Loaned' then '貸出中'
-              else if val=='Reserved' then '予約済み'
-              else val
+            option(value=val)= val
           else
-            option(value=val selected)=
-              if val=='Maintenance' then 'メンテナンス中'
-              else if val=='Available' then '利用可能'
-              else if val=='Loaned' then '貸出中'
-              else if val=='Reserved' then '予約済み'
-              else val
+            option(value=val selected)= val
 
-    button.btn.btn-primary(type='submit') 送信
+    button.btn.btn-primary(type='submit') Submit
 
   if errors
     ul
