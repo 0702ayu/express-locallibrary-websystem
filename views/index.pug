@@ -1,16 +1,45 @@
 extends layout
 
 block content
-  h1= title
-  p ようこそ #[em LocalLibrary] へ。これは、Mozilla Developer Network のチュートリアル用に作成された、非常に基本的な Express サイトです。
+  style.
+    body {
+      background: #faf4e1;
+      font-family: "Yu Mincho", "Hiragino Mincho Pro", serif;
+    }
 
-  h1 動的コンテンツ
+    .japanese-box {
+      background: #fffaf0;
+      border: 2px solid #a17c4d;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
 
-  p 図書館のデータは次のとおりです：
+    .decorative-title {
+      font-size: 2.5rem;
+      color: #4b2e2e;
+      border-bottom: 2px solid #a17c4d;
+      margin-bottom: 1rem;
+    }
 
-  ul
-  li #[strong 本の数:] !{book_count}
-  li #[strong 全ての本の数:] !{book_instance_count}
-  li #[strong 今ある本の数:] !{book_instance_available_count}
-  li #[strong 著者数:] !{author_count}
-  li #[strong ジャンル数:] !{genre_count}
+    .emphasized {
+      color: #9c3d3d;
+      font-weight: bold;
+    }
+
+  h1.decorative-title= title
+
+  div.japanese-box
+    p ようこそ #[em.emphasized LocalLibrary] へ。これは Mozilla Developer Network のチュートリアル用に作成された、非常に基本的な Express サイトです。
+
+  h1.decorative-title 動的コンテンツ
+
+  div.japanese-box
+    p 図書館の現在の蔵書状況は以下の通りです：
+
+    ul
+      li #[strong 本の数:] #{book_count}
+      li #[strong 全ての本の数:] #{book_instance_count}
+      li #[strong 今ある本の数:] #{book_instance_available_count}
+      li #[strong 著者数:] #{author_count}
+      li #[strong ジャンル数:] #{genre_count}
